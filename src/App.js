@@ -3,6 +3,7 @@ import Navbar from "./components/navbar.js";
 import Home from "./components/home.js";
 import Post from "./components/post.js";
 import Find from "./components/find.js";
+import Signin from "./components/signin.js";
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/post" element={<Post />} />
         <Route path="/find" element={<Find />} />
+        <Route path="/signin" element={<Signin />} />
       </Routes>
     </div>
   );

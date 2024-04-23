@@ -85,6 +85,10 @@ export default function Post(){
                     <input onChange = {(e) => handleUpload(e)} type = "file" className="inp"></input>
                 </div>
                 <div className="btn-sub" onClick = {() => {
+                        if(Object.keys(data).length != 7){
+                            window.alert("Please fill all the fields");
+                            return;
+                        }
                         updateData(data);
                         window.alert("Post Uploaded");
                         navigate("/find")

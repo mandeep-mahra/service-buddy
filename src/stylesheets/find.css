@@ -1,4 +1,5 @@
 .find-container{
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,13 +7,14 @@
 }
 .listings{
     width: 80%;
-    margin-top: 5%;
+    margin-top: 2%;
     display: flex;
     flex-wrap: wrap;
     gap : 20px;
 }
 .img-list{
     width : 200px;
+    border-radius: 10px;
 }
 .card{
     border: 2px solid gray;
@@ -22,6 +24,11 @@
     border-radius: 10px;
     width: fit-content;
 }
+
+.card:hover{
+    border: 3px solid black;
+}
+
 .rightside{
     margin-left: 5%;
 }

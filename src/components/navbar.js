@@ -62,7 +62,7 @@ export default function Navbar(){
                 <div onClick = {() => {handleClick()}} className="signin">
                     {currPage}
                 </div>
-                <div className="signin">
+                <div onClick = {() => navigate("/signin")} className="signin">
                     Sign In
                 </div>
             </div>

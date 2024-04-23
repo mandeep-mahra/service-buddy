@@ -1,6 +1,7 @@
 import "../stylesheets/find.css";
 import { downloadData } from "../backend/firebase";
 import { useEffect, useState } from "react";
+import Front from "./frontInfo.js";
 
 export default function Find(){
     const [data, setData] = useState([]);
@@ -11,6 +12,9 @@ export default function Find(){
         })
     }, [])
     return(
+        <>
+        <Front/>
+        <br/>
         <div className="find-container">
             <div className="find-head">
                 Services near you
@@ -48,5 +52,6 @@ export default function Find(){
                 ))}
             </div>
         </div>
+        </>
     )
 }
