@@ -7,14 +7,16 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { change } from "./user";
 
+const serverUrl = "http://localhost:8000";
+
 export default function Find(){
     const [data, setData] = useState([]);
     const location = useLocation();
     const dispatch = useDispatch()
     useEffect(()=>{
-        downloadData().then((res) => {
-            res.map((curr) => curr.request = false)
-            setData(res);
+        fetch(serverUrl+"/data").then((res) => res.json()).then((res) => {
+            console.log(res.data);
+            setData(res.data);
         })
         if(location.state)
             dispatch(change());

@@ -5,7 +5,7 @@ import { uploadUserImage, updateData } from "../backend/firebase";
 import { useNavigate } from "react-router-dom";
 
 var state_arr = new Array("Andaman & Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli", "Daman & Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal");
-
+const serverUrl = "http://localhost:8000";
 
 function print_state(state_id){
    
@@ -89,9 +89,20 @@ export default function Post(){
                             window.alert("Please fill all the fields");
                             return;
                         }
-                        updateData(data);
-                        window.alert("Post Uploaded");
-                        navigate("/find")
+                        fetch(serverUrl+"/upload", {
+                            method : "POST",
+                            headers : {
+                                "Content-Type" : "application/json"
+                            },
+                            body : JSON.stringify({ data : data})
+                        }).then((res)=> {
+                                console.log(res)
+                                window.alert("Post Uploaded");
+                                navigate("/find")
+                            }
+                        );
+                        //updateData(data);
+                        
                     }}>
                     Submit
                 </div>
