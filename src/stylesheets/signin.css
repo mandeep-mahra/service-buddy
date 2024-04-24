@@ -9,6 +9,10 @@
     background-size: cover;
 }
 
+.heading-form{
+    font-size: 2vw;
+}
+
 .form{
     width: 30%;
     display: flex;

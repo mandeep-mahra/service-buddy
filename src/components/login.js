@@ -1,24 +1,13 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import "../stylesheets/signin.css"
-import { change } from "./user";
 
 const serverUrl = "http://localhost:8000";
 
-export default function SignIn(){
+export default function LogIn(){
     const navigate = useNavigate();
-    const user = useSelector((state) => state.user.name);
-    const dispatch = useDispatch();
     const [data, setData] = useState({});
     const [message, setMessage] = useState("");
-    
-
-    useState(() => {
-        if(user === "LogOut"){
-            dispatch(change());
-        }
-    }, [])
 
     function handleData(key, value){
         setData((curr) => {
@@ -27,12 +16,12 @@ export default function SignIn(){
         })
     }
 
-    function handleSubmit(e){
+    function handleLogin(e){
         e.preventDefault();
-        if(Object.keys(data).length !== 3)
+        if(Object.keys(data).length !== 2)
             setMessage("Please fill all the fields!!");
         else{
-            fetch(serverUrl+"/signup", {
+            fetch(serverUrl+"/login", {
                 method : "POST",
                 headers : {
                     "Content-Type" : "application/json"
@@ -42,28 +31,25 @@ export default function SignIn(){
             .then((res) => res.json())
             .then((res) => {
                 if(!res.response)
-                    setMessage("Email already exists try loggin in");
+                    setMessage("Incorrect Username or Password");
                 else
-                    navigate("/login")
+                    navigate("/find", { state : { "email" : data.email }})
             });
         }
     }
 
     return (
         <div className="signin-container">
-            
             <form className="form">
-                <div className="heading-form"> Sign Up With Us</div>
+                <div className="heading-form"> Log In </div>
                 <div>{message}</div>
-                <label className="lab-sign">Name</label>
-                <input onChange = {(e) => handleData("name", e.target.value)} className = "inp-sign" type = "text" required></input>
-                <label className="lab-sign">Email</label>
+                <label  className="lab-sign">Email</label>
                 <input onChange = {(e) => handleData("email", e.target.value)} className = "inp-sign" type = "text" required></input>
                 <label className="lab-sign">Password</label>
                 <input onChange = {(e) => handleData("password", e.target.value)} className = "inp-sign" type = "password" required></input>
-                <input type= "submit" onClick={(e) => handleSubmit(e)} className="btn-sub btn-sign"/>
+                <input type= "submit" onClick = {(e) => handleLogin(e)} className="btn-sub btn-sign"/>
                 <div>
-                    Have an account <a href = "#" onClick={() => navigate("/login") }> login </a>
+                    Dont Have an account <a href = "#" onClick={() => navigate("/signin") }> SignIN </a>
                 </div>
             </form>
             

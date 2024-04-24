@@ -3,6 +3,7 @@ import {s_a} from "../data/states.js"
 import { useEffect, useState } from "react";
 import pin from "../resources/pin.svg"
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 var state_arr = new Array("Andaman & Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli", "Daman & Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal");
 
@@ -33,6 +34,7 @@ function print_city(city_id, city_index){
 export default function Navbar(){
     const [currPage, setCurrPage] = useState("Post");
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user.name)
     useEffect(()=>{
         print_state("sts");
         navigate("/find");
@@ -63,7 +65,7 @@ export default function Navbar(){
                     {currPage}
                 </div>
                 <div onClick = {() => navigate("/signin")} className="signin">
-                    Sign In
+                    {user}
                 </div>
             </div>
             

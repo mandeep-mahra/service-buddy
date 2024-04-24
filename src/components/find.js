@@ -2,14 +2,22 @@ import "../stylesheets/find.css";
 import { downloadData } from "../backend/firebase";
 import { useEffect, useState } from "react";
 import Front from "./frontInfo.js";
+import Foot from "./footer.js";
+import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { change } from "./user";
 
 export default function Find(){
     const [data, setData] = useState([]);
+    const location = useLocation();
+    const dispatch = useDispatch()
     useEffect(()=>{
         downloadData().then((res) => {
             res.map((curr) => curr.request = false)
             setData(res);
         })
+        if(location.state)
+            dispatch(change());
     }, [])
     return(
         <>
