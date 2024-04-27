@@ -8,7 +8,6 @@ var state_arr = new Array("Andaman & Nicobar", "Andhra Pradesh", "Arunachal Prad
 const serverUrl = "http://localhost:8000";
 
 function print_state(state_id){
-   
 	var option_str = document.getElementById(state_id);
 	option_str.length=0;
 	option_str.options[0] = new Option('Select State','');
